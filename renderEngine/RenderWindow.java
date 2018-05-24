@@ -41,28 +41,29 @@ import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.system.MemoryStack;
 
-public class DisplayWindow {
+public class RenderWindow {
 
-	private static final int WINDOW_WIDTH = 1280, WINDOW_HEIGHT = 720;
+	private int windowWidth = 1280, windowHeight = 720, frameCounter = 0;
 
-	private static final String WINDOW_NAME = "Arsia";
+	private String windowName = "Window";
 
 	private static long window;
 
-	public DisplayWindow() {
-		initWindow();
-		loopWindow();
-		terminateWindow();
+	public RenderWindow(int windowWidth, int windowHeight, String windowName) {
+		this.windowWidth = windowWidth;
+		this.windowHeight = windowHeight;
+		this.windowName = windowName;
+		init();
 	}
 
-	private void handleGLFWInput() {
+	private void setupInput() {
 		glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
 			if (key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE)
 				glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
 		});
 	}
 
-	private void initWindow() {
+	private void init() {
 		// The default implementation will print the error message in System.err
 		GLFWErrorCallback.createPrint(System.err).set();
 
@@ -74,11 +75,11 @@ public class DisplayWindow {
 		glfwWindowHint(GLFW_FOCUSED, GLFW_TRUE);
 		glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
-		window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME, NULL, NULL);
+		window = glfwCreateWindow(windowWidth, windowHeight, windowName, NULL, NULL);
 		if (window == NULL)
 			throw new RuntimeException("Failed to create the GLFW window");
 
-		handleGLFWInput();
+		setupInput();
 
 		// Get the thread stack and push a new frame
 		try (MemoryStack stack = stackPush()) {
@@ -102,7 +103,9 @@ public class DisplayWindow {
 		glfwShowWindow(window);
 	}
 
-	private void loopWindow() {
+	public void update() {
+		System.out.println("Frame " + ++frameCounter + "...");
+
 		// This line is critical for LWJGL's interoperation with GLFW's
 		// OpenGL context, or any context that is managed externally.
 		// LWJGL detects the context that is current in the current thread,
@@ -112,21 +115,19 @@ public class DisplayWindow {
 
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
-		while (!glfwWindowShouldClose(window)) {
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			glfwSwapBuffers(window);
-			glfwPollEvents();
-		}
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glfwSwapBuffers(window);
+		glfwPollEvents();
 	}
 
-	private void terminateWindow() {
+	public void terminate() {
 		glfwFreeCallbacks(window);
 		glfwDestroyWindow(window);
 		glfwTerminate();
 		glfwSetErrorCallback(null).free();
 	}
 
-	public static void main(String[] args) {
-		new DisplayWindow();
+	public boolean isClosed() {
+		return glfwWindowShouldClose(window);
 	}
 }
