@@ -41,13 +41,15 @@ import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.system.MemoryStack;
 
+import main.Arsia;
+
 public class RenderWindow {
 
 	private int windowWidth = 1280, windowHeight = 720, frameCounter = 0;
 
 	private String windowName = "Window";
 
-	private static long window;
+	private long window;
 
 	public RenderWindow(int windowWidth, int windowHeight, String windowName) {
 		this.windowWidth = windowWidth;
@@ -104,7 +106,11 @@ public class RenderWindow {
 	}
 
 	public void update() {
-		System.out.println("Frame " + ++frameCounter + "...");
+		frameCounter++;
+
+		if (Arsia.DEBUG) {
+			System.out.println("Frame: " + frameCounter);
+		}
 
 		// This line is critical for LWJGL's interoperation with GLFW's
 		// OpenGL context, or any context that is managed externally.
