@@ -2,7 +2,7 @@ package main;
 
 import static java.lang.System.nanoTime;
 
-import renderEngine.RenderWindow;
+import renderEngine.RenderInputWindow;
 
 public class Arsia {
 
@@ -25,13 +25,14 @@ public class Arsia {
 			System.out.println("Creating & initializing display window...");
 		}
 
-		RenderWindow rw = new RenderWindow(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME);
+		RenderInputWindow riw = new RenderInputWindow(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME);
+		riw.init();
 
 		if (Arsia.DEBUG) {
 			System.out.println("Updating display window...");
 		}
 
-		while (!rw.isClosed()) {
+		while (!riw.isClosed()) {
 			if (!startGame) {
 				startGame = true;
 				previousTimeNs = nanoTime();
@@ -45,14 +46,14 @@ public class Arsia {
 				delta--;
 			}
 
-			rw.update();
+			riw.render();
 		}
 
 		if (Arsia.DEBUG) {
 			System.out.println("Terminating display window...");
 		}
 
-		rw.terminate();
+		riw.terminate();
 	}
 
 	private void tick() {

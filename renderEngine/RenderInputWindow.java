@@ -43,7 +43,7 @@ import org.lwjgl.system.MemoryStack;
 
 import main.Arsia;
 
-public class RenderWindow {
+public class RenderInputWindow {
 
 	private int windowWidth = 1280, windowHeight = 720, frameCounter = 0;
 
@@ -51,11 +51,10 @@ public class RenderWindow {
 
 	private long window;
 
-	public RenderWindow(int windowWidth, int windowHeight, String windowName) {
+	public RenderInputWindow(int windowWidth, int windowHeight, String windowName) {
 		this.windowWidth = windowWidth;
 		this.windowHeight = windowHeight;
 		this.windowName = windowName;
-		init();
 	}
 
 	private void setupInput() {
@@ -65,7 +64,7 @@ public class RenderWindow {
 		});
 	}
 
-	private void init() {
+	public void init() {
 		// The default implementation will print the error message in System.err
 		GLFWErrorCallback.createPrint(System.err).set();
 
@@ -105,7 +104,7 @@ public class RenderWindow {
 		glfwShowWindow(window);
 	}
 
-	public void update() {
+	public void render() {
 		frameCounter++;
 
 		if (Arsia.DEBUG) {
