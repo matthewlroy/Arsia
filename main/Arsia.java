@@ -2,9 +2,6 @@ package main;
 
 import static java.lang.System.nanoTime;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
-
 import renderEngine.RenderInputWindow;
 
 public class Arsia {
@@ -71,10 +68,8 @@ public class Arsia {
 		try {
 			new Arsia().run();
 		} catch (Exception e) {
-			StringWriter outError = new StringWriter();
-			e.printStackTrace(new PrintWriter(outError));
-			String errorString = outError.toString();
-			System.out.println(errorString);
+			System.err.println("Game has crashed! :(");
+			e.printStackTrace();
 		}
 	}
 }
