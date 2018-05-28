@@ -45,7 +45,7 @@ import main.Arsia;
 
 public class RenderInputWindow {
 
-	private int windowWidth = 1280, windowHeight = 720, frameCounter = 0;
+	private int windowWidth = 1280, windowHeight = 720, frameCounter = -1;
 
 	private String windowName = "Window";
 
