@@ -8,8 +8,17 @@ import renderEngine.ModelLoader;
 import renderEngine.RawModel;
 import renderEngine.RenderInputWindow;
 
+/**
+ * TODO: Javadoc
+ * 
+ * @author Matthew L. Roy
+ *
+ */
 public class Arsia {
 
+	/**
+	 * TODO: Javadoc
+	 */
 	public static final boolean DEBUG = true;
 
 	private final int WINDOW_WIDTH = 1280, WINDOW_HEIGHT = 720;
@@ -33,7 +42,7 @@ public class Arsia {
 		riw.init();
 
 		if (Arsia.DEBUG) {
-			System.out.println("Updating display window...");
+			System.out.println("Creating a quad via the ModelLoader...");
 		}
 
 		GL.createCapabilities();
@@ -41,6 +50,10 @@ public class Arsia {
 		float[] vertices = { -0.5f, 0.5f, 0f, -0.5f, -0.5f, 0f, 0.5f, -0.5f, 0f, 0.5f, -0.5f, 0f, 0.5f, 0.5f, 0f, -0.5f,
 				0.5f, 0f };
 		RawModel model = loader.loadToVAO(vertices);
+
+		if (Arsia.DEBUG) {
+			System.out.println("Updating display window...");
+		}
 
 		// Main game loop will follow this process:
 		// 1. Compute the current time and deltas
@@ -72,7 +85,7 @@ public class Arsia {
 		}
 
 		if (Arsia.DEBUG) {
-			System.out.println("Terminating display window...");
+			System.out.println("Performing clean up of resources...");
 		}
 
 		loader.cleanUp();
@@ -87,6 +100,11 @@ public class Arsia {
 		}
 	}
 
+	/**
+	 * TODO: Javadoc
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		try {
 			new Arsia().run();

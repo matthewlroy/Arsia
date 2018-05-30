@@ -4,7 +4,19 @@ import java.nio.FloatBuffer;
 
 import org.lwjgl.BufferUtils;
 
+/**
+ * TODO: Javadoc
+ * 
+ * @author Matthew L. Roy
+ *
+ */
 public class TypeConversions {
+	/**
+	 * TODO: Javadoc
+	 * 
+	 * @param data
+	 * @return
+	 */
 	public static FloatBuffer floatArrayToFloatBuffer(float[] data) {
 		// Create empty float buffer, letting buffer know length of data
 		FloatBuffer buffer = BufferUtils.createFloatBuffer(data.length);

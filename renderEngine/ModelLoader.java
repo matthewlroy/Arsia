@@ -12,15 +12,30 @@ import org.lwjgl.opengl.GL30;
 import main.Arsia;
 import utility.TypeConversions;
 
-/*
- * This class deals with loading 3D models into memory. Specifically, this class stores positional data about the model in a VAO
+/**
+ * TODO: Javadoc
+ * 
+ * @author Matthew L. Roy
+ *
  */
+
+/*
+ * This class deals with loading 3D models into memory. Specifically, this class
+ * stores positional data about the model in a VAO
+ */
+
 public class ModelLoader {
 
 	// Setting up lists for memory management, so that they may be properly cleaned
 	private List<Integer> vaoList = new ArrayList<Integer>();
 	private List<Integer> vboList = new ArrayList<Integer>();
 
+	/**
+	 * TODO: Javadoc
+	 * 
+	 * @param positions
+	 * @return
+	 */
 	public RawModel loadToVAO(float[] positions) {
 		if (Arsia.DEBUG) {
 			System.out.println("Creating VAO...");
@@ -42,7 +57,9 @@ public class ModelLoader {
 		return new RawModel(vaoId, positions.length / 3);
 	}
 
-	// Call this when done rendering
+	/**
+	 * TODO: Javadoc
+	 */
 	public void cleanUp() {
 		for (int vaoId : vaoList) {
 			GL30.glDeleteVertexArrays(vaoId);
