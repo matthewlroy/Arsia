@@ -76,7 +76,7 @@ public class Arsia {
 		}
 
 		loader.cleanUp();
-		riw.terminate();
+		riw.cleanUp();
 	}
 
 	private void tick() {

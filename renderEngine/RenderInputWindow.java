@@ -135,7 +135,7 @@ public class RenderInputWindow {
 		glfwPollEvents(); // Will poll ALL events, but currently just INPUT
 	}
 
-	public void terminate() {
+	public void cleanUp() {
 		glfwFreeCallbacks(window);
 		glfwDestroyWindow(window);
 		glfwTerminate();
