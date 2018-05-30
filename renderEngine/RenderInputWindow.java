@@ -39,6 +39,9 @@ import java.nio.IntBuffer;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL20;
+import org.lwjgl.opengl.GL30;
 import org.lwjgl.system.MemoryStack;
 
 import main.Arsia;
@@ -97,32 +100,39 @@ public class RenderInputWindow {
 		} // The stack frame is popped automatically
 
 		glfwMakeContextCurrent(window);
-
-		// Enable v-sync
-		glfwSwapInterval(1);
-
+		glfwSwapInterval(1); // Enable v-sync
 		glfwShowWindow(window);
 	}
 
-	public void render() {
+	public void prepare() {
 		frameCounter++;
 
 		if (Arsia.DEBUG) {
 			System.out.println("Frame: " + frameCounter);
 		}
 
-		// This line is critical for LWJGL's interoperation with GLFW's
-		// OpenGL context, or any context that is managed externally.
-		// LWJGL detects the context that is current in the current thread,
-		// creates the GLCapabilities instance and makes the OpenGL
-		// bindings available for use.
+		// This line is critical for LWJGL's interoperation with GLFW's OpenGL context,
+		// or any context that is managed externally. LWJGL detects the context that is
+		// current in the current thread, creates the GLCapabilities instance and makes
+		// the OpenGL bindings available for use.
 		GL.createCapabilities();
 
-		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-
+		// Sets the background color and clears it to that color (red)
+		glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	}
+
+	public void render(RawModel model) {
+		GL30.glBindVertexArray(model.getVaoId());
+		GL20.glEnableVertexAttribArray(0);
+		GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, model.getVertexCount());
+		GL20.glDisableVertexAttribArray(0);
+		GL30.glBindVertexArray(0);
 		glfwSwapBuffers(window);
-		glfwPollEvents();
+	}
+
+	public void handleInput() {
+		glfwPollEvents(); // Will poll ALL events, but currently just INPUT
 	}
 
 	public void terminate() {
