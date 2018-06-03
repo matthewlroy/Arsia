@@ -52,7 +52,7 @@ public class RenderInputWindow {
 
 	private String windowName = "Window";
 
-	private long window;
+	private long window = 0L;
 
 	/**
 	 * This constructor just sets up the passed variables for the initializing
