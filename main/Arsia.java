@@ -48,8 +48,8 @@ public class Arsia {
 
 	private long previousTimeNs = 0, currentTimeNs = 0;
 
-	private final double ticksPerSecond = 20D;
-	private double nsPerIteration = 1000000000D / ticksPerSecond, delta = 0;
+	private final double TICKS_PER_SECOND = 20D;
+	private double nsPerIteration = 1000000000D / TICKS_PER_SECOND, delta = 0;
 
 	private boolean startGame = false;
 
