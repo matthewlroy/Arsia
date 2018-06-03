@@ -1,5 +1,7 @@
 package renderEngine;
 
+import static main.Arsia.ARSIA_DEBUG;
+
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +11,6 @@ import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
-import main.Arsia;
 import utility.TypeConversions;
 
 /**
@@ -44,13 +45,13 @@ public class ModelLoader {
 		int vertexCount = positions.length / 3;
 		RawModel model = null;
 
-		if (Arsia.DEBUG) {
+		if (ARSIA_DEBUG) {
 			System.out.println("Creating VAO...");
 		}
 
 		int vaoId = createVAO();
 
-		if (Arsia.DEBUG) {
+		if (ARSIA_DEBUG) {
 			System.out.println("Created VAO with Id: " + vaoId);
 		}
 

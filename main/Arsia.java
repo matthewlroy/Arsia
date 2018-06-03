@@ -39,8 +39,7 @@ public class Arsia {
 	/**
 	 * Prints debug and trace statements to standard output when true
 	 */
-	// TODO: Rename variable and add as static import in other classes used
-	public static final boolean DEBUG = true;
+	public static final boolean ARSIA_DEBUG = true;
 
 	private final int WINDOW_WIDTH = 1280, WINDOW_HEIGHT = 720;
 	private int currentTick = -1;
@@ -72,14 +71,14 @@ public class Arsia {
 	}
 
 	private void run() {
-		if (Arsia.DEBUG) {
+		if (ARSIA_DEBUG) {
 			System.out.println("Creating and initializing display window...");
 		}
 
 		RenderInputWindow riw = new RenderInputWindow(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME);
 		riw.init();
 
-		if (Arsia.DEBUG) {
+		if (ARSIA_DEBUG) {
 			System.out.println("Creating a quad via the ModelLoader...");
 		}
 
@@ -90,7 +89,7 @@ public class Arsia {
 				0.5f, 0f };
 		RawModel model = loader.loadToVAO(vertices);
 
-		if (Arsia.DEBUG) {
+		if (ARSIA_DEBUG) {
 			System.out.println("Updating display window...");
 		}
 
@@ -121,7 +120,7 @@ public class Arsia {
 			riw.render(model);
 		}
 
-		if (Arsia.DEBUG) {
+		if (ARSIA_DEBUG) {
 			System.out.println("Performing clean up of resources...");
 		}
 
@@ -132,7 +131,7 @@ public class Arsia {
 	private void tick() {
 		currentTick++;
 
-		if (Arsia.DEBUG) {
+		if (ARSIA_DEBUG) {
 			System.out.println(currentTick / 20 + " sec:\tcurrentTick: " + currentTick);
 		}
 	}

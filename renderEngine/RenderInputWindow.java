@@ -1,5 +1,6 @@
 package renderEngine;
 
+import static main.Arsia.ARSIA_DEBUG;
 import static org.lwjgl.glfw.GLFW.glfwSwapBuffers;
 import static org.lwjgl.opengl.GL.createCapabilities;
 import static org.lwjgl.opengl.GL11.GL_TRIANGLES;
@@ -19,8 +20,6 @@ import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.system.MemoryStack;
 import org.lwjgl.system.MemoryUtil;
-
-import main.Arsia;
 
 /**
  * This class functions as the main display for Arsia. It generates a render
@@ -150,7 +149,7 @@ public class RenderInputWindow {
 	public void prepare() {
 		frameCounter++;
 
-		if (Arsia.DEBUG) {
+		if (ARSIA_DEBUG) {
 			System.out.println("Frame: " + frameCounter);
 		}
 
