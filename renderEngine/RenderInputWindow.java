@@ -54,6 +54,17 @@ public class RenderInputWindow {
 	private long window = 0L;
 
 	/**
+	 * This method links OpenGL with the GLFW library. This method is critical for
+	 * LWJGL's interpretation with GLFW's OpenGL context, or any context that is
+	 * managed externally. LWJGL detects the context that is current in the current
+	 * thread, creates the GLCapabilities instance and makes the OpenGL bindings
+	 * available for use.
+	 */
+	public static void linkOpenGLContext() {
+		createCapabilities();
+	}
+
+	/**
 	 * This constructor just sets up the passed variables for the initializing
 	 * method. Make a call immediately to {@link #init()} once the constructor has
 	 * been called.
@@ -138,13 +149,12 @@ public class RenderInputWindow {
 	}
 
 	/**
-	 * This method prepares the GLFW API for rendering. This method is critical for
-	 * LWJGL's interpretation with GLFW's OpenGL context, or any context that is
-	 * managed externally. LWJGL detects the context that is current in the current
-	 * thread, creates the GLCapabilities instance and makes the OpenGL bindings
-	 * available for use. Also sets the clear color to the desired RGB
-	 * configuration. Make a call to {@link #render(RawModel)} after calling
-	 * prepare.
+	 * This method is critical for preparing the GLFW API for rendering as it links
+	 * the current OpenGL context. Also, this method sets the clear color to the
+	 * desired RGB configuration and updates the frame counter. Make a call to
+	 * {@link #render(RawModel)} after calling prepare.
+	 * 
+	 * @see {@link #linkOpenGLContext()}
 	 */
 	public void prepare() {
 		frameCounter++;

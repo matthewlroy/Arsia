@@ -40,6 +40,7 @@ public class ModelLoader {
 	 * @see {@link renderEngine.RawModel#RawModel(int, int)}
 	 */
 	public RawModel loadToVAO(float[] positions) {
+		RenderInputWindow.linkOpenGLContext(); // CRITICAL
 
 		/* Divide length by 3 to account for (X, Y, Z) vertex positions */
 		int vertexCount = positions.length / 3;

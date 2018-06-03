@@ -2,8 +2,6 @@ package main;
 
 import static java.lang.System.nanoTime;
 
-import org.lwjgl.opengl.GL;
-
 import renderEngine.ModelLoader;
 import renderEngine.RawModel;
 import renderEngine.RenderInputWindow;
@@ -82,12 +80,10 @@ public class Arsia {
 			System.out.println("Creating a quad via the ModelLoader...");
 		}
 
-		// FIXME: Naming conventions & placement of these lines of code
-		GL.createCapabilities(); // FIXME: Correct place for this?
-		ModelLoader loader = new ModelLoader();
-		float[] vertices = { -0.5f, 0.5f, 0f, -0.5f, -0.5f, 0f, 0.5f, -0.5f, 0f, 0.5f, -0.5f, 0f, 0.5f, 0.5f, 0f, -0.5f,
-				0.5f, 0f };
-		RawModel model = loader.loadToVAO(vertices);
+		ModelLoader modelLoader = new ModelLoader();
+		float[] quad_vertexes = { -0.5f, 0.5f, 0f, -0.5f, -0.5f, 0f, 0.5f, -0.5f, 0f, 0.5f, -0.5f, 0f, 0.5f, 0.5f, 0f,
+				-0.5f, 0.5f, 0f };
+		RawModel quadRawModel = modelLoader.loadToVAO(quad_vertexes);
 
 		if (ARSIA_DEBUG) {
 			System.out.println("Updating display window...");
@@ -117,14 +113,14 @@ public class Arsia {
 
 			/* 4. Render using steps from: {@link renderEngine.RenderInputWindow} */
 			riw.prepare();
-			riw.render(model);
+			riw.render(quadRawModel);
 		}
 
 		if (ARSIA_DEBUG) {
 			System.out.println("Performing clean up of resources...");
 		}
 
-		loader.cleanUp();
+		modelLoader.cleanUp();
 		riw.cleanUp();
 	}
 
