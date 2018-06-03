@@ -4,9 +4,10 @@ import static main.Arsia.ARSIA_DEBUG;
 import static org.lwjgl.glfw.GLFW.glfwSwapBuffers;
 import static org.lwjgl.opengl.GL.createCapabilities;
 import static org.lwjgl.opengl.GL11.GL_TRIANGLES;
+import static org.lwjgl.opengl.GL11.GL_UNSIGNED_INT;
 import static org.lwjgl.opengl.GL11.glClear;
 import static org.lwjgl.opengl.GL11.glClearColor;
-import static org.lwjgl.opengl.GL11.glDrawArrays;
+import static org.lwjgl.opengl.GL11.glDrawElements;
 import static org.lwjgl.opengl.GL20.glDisableVertexAttribArray;
 import static org.lwjgl.opengl.GL20.glEnableVertexAttribArray;
 import static org.lwjgl.opengl.GL30.glBindVertexArray;
@@ -184,7 +185,7 @@ public class RenderInputWindow {
 		 */
 		glBindVertexArray(model.getVaoId());
 		glEnableVertexAttribArray(0);
-		glDrawArrays(GL_TRIANGLES, 0, model.getVertexCount());
+		glDrawElements(GL_TRIANGLES, model.getVertexCount(), GL_UNSIGNED_INT, 0);
 		glDisableVertexAttribArray(0);
 		glBindVertexArray(0);
 		glfwSwapBuffers(window); // CRITICAL

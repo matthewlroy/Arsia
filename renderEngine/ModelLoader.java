@@ -3,6 +3,7 @@ package renderEngine;
 import static main.Arsia.ARSIA_DEBUG;
 
 import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,11 +40,10 @@ public class ModelLoader {
 	 * @return the model object containing the Vao Id and vertex count
 	 * @see {@link renderEngine.RawModel#RawModel(int, int)}
 	 */
-	public RawModel loadToVAO(float[] positions) {
+	public RawModel loadToVAO(float[] positions, int[] indices) {
 		RenderInputWindow.linkOpenGLContext(); // CRITICAL
 
-		/* Divide length by 3 to account for (X, Y, Z) vertex positions */
-		int vertexCount = positions.length / 3;
+		int vertexCount = indices.length;
 		RawModel model = null;
 
 		if (ARSIA_DEBUG) {
@@ -51,6 +51,7 @@ public class ModelLoader {
 		}
 
 		int vaoId = createVAO();
+		bindIndicesBuffer(indices);
 
 		if (ARSIA_DEBUG) {
 			System.out.println("Created VAO with Id: " + vaoId);
@@ -125,5 +126,13 @@ public class ModelLoader {
 	private void unbindVAO() {
 		/* Passing zero to this method unbinds the VAO, per OpenGL */
 		GL30.glBindVertexArray(0);
+	}
+
+	private void bindIndicesBuffer(int[] indices) {
+		int vboId = GL15.glGenBuffers();
+		vboList.add(vboId);
+		GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, vboId);
+		IntBuffer buffer = TypeConversions.intArrayToIntBuffer(indices);
+		GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, buffer, GL15.GL_STATIC_DRAW);
 	}
 }

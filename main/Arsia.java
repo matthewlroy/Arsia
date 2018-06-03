@@ -81,9 +81,9 @@ public class Arsia {
 		}
 
 		ModelLoader modelLoader = new ModelLoader();
-		float[] quad_vertexes = { -0.5f, 0.5f, 0f, -0.5f, -0.5f, 0f, 0.5f, -0.5f, 0f, 0.5f, -0.5f, 0f, 0.5f, 0.5f, 0f,
-				-0.5f, 0.5f, 0f };
-		RawModel quadRawModel = modelLoader.loadToVAO(quad_vertexes);
+		float[] quad_vertexes = { -0.5f, 0.5f, 0f, -0.5f, -0.5f, 0f, 0.5f, -0.5f, 0f, 0.5f, 0.5f, 0f };
+		int[] quad_indices = { 0, 1, 3, 3, 1, 2 };
+		RawModel quadRawModel = modelLoader.loadToVAO(quad_vertexes, quad_indices);
 
 		if (ARSIA_DEBUG) {
 			System.out.println("Updating display window...");

@@ -1,6 +1,7 @@
 package utility;
 
 import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
 
 import org.lwjgl.BufferUtils;
 
@@ -12,7 +13,7 @@ import org.lwjgl.BufferUtils;
  */
 public class TypeConversions {
 	/**
-	 * Takes in float array and returns the respective float buffer.
+	 * Takes in a float array and returns the respective float buffer.
 	 * 
 	 * @param data
 	 *            the data to be transferred into the buffer
@@ -29,6 +30,20 @@ public class TypeConversions {
 		/* Tells buffer that we are finished writing to it, now in a read-from state */
 		buffer.flip();
 
+		return buffer;
+	}
+
+	/**
+	 * Takes in an int array and returns the respective int buffer.
+	 * 
+	 * @param data
+	 *            the data to be transferred into the buffer
+	 * @return the newly created buffer from the passed in data
+	 */
+	public static IntBuffer intArrayToIntBuffer(int[] data) {
+		IntBuffer buffer = BufferUtils.createIntBuffer(data.length);
+		buffer.put(data);
+		buffer.flip();
 		return buffer;
 	}
 }
