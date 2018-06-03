@@ -1,29 +1,39 @@
 package renderEngine;
 
 /**
- * TODO: Javadoc
+ * This class represents a 3D model stored in memory, as determined by it's
+ * Vertex Array Object (VAO). Every dataset stored in the indices of the
+ * attribute list is a Vertex Buffer Object (VBO). Every VAO is given an Id, and
+ * generally represents the 3D object as a set of triangles. Per conventions of
+ * Arsia and these classes, these are functions for the VBOs at their VAO
+ * attribute lists indices:
+ * 
+ * <ul>
+ * <li>[0 | vertex positions]</li>
+ * <li>[1 | vertex colors]</li>
+ * <li>[2 | normal vectors]</li>
+ * <li>[3 | texture coordinates]</li>
+ * <li>[4 | ....]</li>
+ * <li>[15| ....]</li>
+ * </ul>
  * 
  * @author Matthew L. Roy
  *
- */
-
-/*
- * This class represents a 3D model stored in memory, as determined by it's
- * Vertex Array Object (VAO) Id VAO Example: [0 | vertex positions] [1 | vertex
- * colors] [2 | normal vectors] [3 | texture coordinates] [4 | ....] [15| ....]
- * Every data set in the above indices of the attribute list is a Vertex Buffer
- * Object (VBO) Every VAO is given an Id, and generally represents the 3D object
- * as a set of triangles
  */
 public class RawModel {
 
 	private int vaoId, vertexCount;
 
 	/**
-	 * TODO: Javadoc
+	 * Construct a logical representation of a 3D model in memory; this constructor
+	 * merely acts a pointer to important fields of that model.
 	 * 
 	 * @param vaoId
+	 *            the Vertex Array Object ID that was given by the OpenGL pipeline
 	 * @param vertexCount
+	 *            the amount of vertexes for this model. For example, (X, Y, Z)
+	 *            coordinates are 3 different float values, but will only represent
+	 *            1 vertex
 	 */
 	public RawModel(int vaoId, int vertexCount) {
 		this.vaoId = vaoId;
@@ -31,18 +41,20 @@ public class RawModel {
 	}
 
 	/**
-	 * TODO: Javadoc
+	 * Returns the integer Id value for this model's VAO, as determined during the
+	 * creation of the model by the OpenGL pipeline.
 	 * 
-	 * @return
+	 * @return the Vertex Array Object ID that was given by the OpenGL pipeline
 	 */
 	public int getVaoId() {
 		return vaoId;
 	}
 
 	/**
-	 * TODO: Javadoc
+	 * Returns the count of vertexes to be used by the OpenGL render methods.
 	 * 
-	 * @return
+	 * @return the amount of vertexes to be rendered from this VAO
+	 * @see {@link renderEngine.RenderInputWindow#render(RawModel)}
 	 */
 	public int getVertexCount() {
 		return vertexCount;
