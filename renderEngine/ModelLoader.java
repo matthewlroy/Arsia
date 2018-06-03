@@ -60,7 +60,7 @@ public class ModelLoader {
 		/* Required per OpenGL to unbind once previously bound */
 		unbindVAO();
 
-		model = new RawModel(vaoId, vertexCount); // TODO: Check for null exception
+		model = new RawModel(vaoId, vertexCount);
 		return model;
 	}
 
