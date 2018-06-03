@@ -23,13 +23,11 @@ import org.lwjgl.system.MemoryUtil;
 import main.Arsia;
 
 /**
- * <p>
  * This class functions as the main display for Arsia. It generates a render
  * window that also handles user input. This is achieved by using the underlying
- * GLFW library in tandem with the OpenGL pipeline.
- * </p>
+ * GLFW library in tandem with the OpenGL pipeline. To properly use this class,
+ * follow the general order of operations:
  * 
- * To properly use this class, follow the general order of operations:
  * <ol>
  * <li>Construct the display, specifying width, height, and window title
  * name</li>
