@@ -7,11 +7,18 @@ import org.lwjgl.BufferUtils;
 
 /**
  * Deals with conversions of non-primitive data types such as arrays to buffers.
+ * This class behaves in a "static" fashion in the sense that it is constant and
+ * cannot be constructed publicly.
  * 
  * @author Matthew L. Roy
  *
  */
-public class TypeConversions {
+public final class TypeConversions {
+
+	/* Private so that this class does not accidently get instantiated */
+	private TypeConversions() {
+	}
+
 	/**
 	 * Takes in a float array and returns the respective float buffer.
 	 * 
