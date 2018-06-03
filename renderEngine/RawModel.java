@@ -18,6 +18,7 @@ package renderEngine;
  * </ul>
  * 
  * @author Matthew L. Roy
+ * @see {@link renderEngine.ModelLoader#loadToVAO(float[])}
  *
  */
 public class RawModel {
