@@ -22,7 +22,7 @@ package renderEngine;
  */
 public class RawModel {
 
-	private int vaoId, vertexCount;
+	private int vaoId = 0, vertexCount = 0;
 
 	/**
 	 * Construct a logical representation of a 3D model in memory; this constructor
